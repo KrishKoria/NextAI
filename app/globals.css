@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+  @apply m-0 box-border p-0;
+}
+
+body {
+  @apply bg-[#0e0c16] text-[#ececec];
+}
+
+a {
+  @apply text-inherit no-underline;
+}
