@@ -9,6 +9,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      backgroundImage: {
+        "homepage-bg": "url('/bg.png')",
+      },
       colors: {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
@@ -58,6 +61,8 @@ const config: Config = {
       },
       animation: {
         "bg-spin": "rotateOrbital 100s linear infinite",
+        "slide-bg": "8s ease-in-out infinite alternate slideBg",
+        "bot-animate": "3s ease-in-out infinite alternate botAnimate",
       },
       keyframes: {
         rotateOrbital: {
@@ -66,6 +71,22 @@ const config: Config = {
           },
           "100%": {
             transform: "rotate(60deg)",
+          },
+        },
+        slideBg: {
+          "0%": {
+            transform: "translateX(0%)",
+          },
+          "100%": {
+            transform: "translateX(-50%)",
+          },
+        },
+        botAnimate: {
+          "0%": {
+            transform: "scale(1) rotate(0deg)",
+          },
+          "100%": {
+            transform: "scale(1.1) rotate(-5deg)",
           },
         },
       },

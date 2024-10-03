@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import orbital from "@/assets/orbital.png";
 import Image from "next/image";
+import bot from "@/assets/bot.png";
 export default function Home() {
   return (
     <div className="flex h-full items-center gap-[100px]">
@@ -26,7 +27,18 @@ export default function Home() {
           <Link href={"/dashboard"}>Get Started</Link>
         </Button>
       </div>
-      <div className="flex-1"></div>
+      <div className="flex h-full flex-1 items-center justify-center">
+        <div className="relative flex h-[50%] w-[80%] items-center justify-center rounded-[50px] bg-[#140e2d]">
+          <div className="absolute left-0 top-0 h-full w-full overflow-hidden rounded-[50px]">
+            <div className="bg-homepage-bg animate-slide-bg h-full w-[200%] bg-auto opacity-[0.2]"></div>
+          </div>
+          <Image
+            src={bot}
+            alt=""
+            className="animate-bot-animate h-full w-full object-contain"
+          />
+        </div>
+      </div>
     </div>
   );
 }
