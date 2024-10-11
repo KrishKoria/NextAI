@@ -9,7 +9,7 @@ export default function Home() {
       <Image
         src={orbital}
         alt="bg"
-        className="animate-bg-spin absolute bottom-0 top-0 opacity-10"
+        className="absolute bottom-0 top-0 -z-10 animate-bg-spin opacity-5"
       />
       <div className="flex flex-1 flex-col items-center justify-center gap-[16px] text-center">
         <h1 className="bg-gradient-to-r from-[#217bfe] to-[#e55571] bg-clip-text text-[128px] font-bold text-transparent">
@@ -30,12 +30,12 @@ export default function Home() {
       <div className="flex h-full flex-1 items-center justify-center">
         <div className="relative flex h-[50%] w-[80%] items-center justify-center rounded-[50px] bg-[#140e2d]">
           <div className="absolute left-0 top-0 h-full w-full overflow-hidden rounded-[50px]">
-            <div className="bg-homepage-bg animate-slide-bg h-full w-[200%] bg-auto opacity-[0.2]"></div>
+            <div className="h-full w-[200%] animate-slide-bg bg-homepage-bg bg-auto opacity-[0.2]"></div>
           </div>
           <Image
             src={bot}
             alt=""
-            className="animate-bot-animate h-full w-full object-contain"
+            className="h-full w-full animate-bot-animate object-contain"
           />
         </div>
       </div>

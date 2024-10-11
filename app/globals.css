@@ -13,3 +13,7 @@ body {
 a {
   @apply text-inherit no-underline;
 }
+
+::-webkit-scrollbar {
+  display: none;
+}
