@@ -7,10 +7,13 @@ import { CldImage, CldUploadWidget } from "next-cloudinary";
 import Image from "next/image";
 import attachment from "@/assets/attachment.png";
 import arrow from "@/assets/arrow.png";
+import { GenerateResponse } from "@/lib/actions";
+import Markdown from "react-markdown";
 
 export default function ChatPrompt() {
-  const [message, setMessage] = useState("");
   const [image, setImage] = useState<string | null>(null);
+  const [response, setResponse] = useState<string | null>(null);
+  const [prompt, setPrompt] = useState<string | null>(null);
   const endRef = useRef<HTMLDivElement>(null);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -18,10 +21,13 @@ export default function ChatPrompt() {
     setImage(result.info.secure_url);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle sending the message here
-    console.log("Sending message:", message);
+    const prompt = new FormData(e.target as HTMLFormElement);
+    if (!prompt) return;
+    setPrompt(prompt.get("prompt") as string);
+    const res = await GenerateResponse(prompt);
+    setResponse(res);
   };
 
   useEffect(() => {
@@ -34,6 +40,16 @@ export default function ChatPrompt() {
     <>
       {image && (
         <CldImage width={250} height={250} alt="chat image" src={image} />
+      )}
+      {prompt && (
+        <div className="max-w-[80%] self-end rounded-[20px] bg-[#2c2937] p-2">
+          {prompt}
+        </div>
+      )}
+      {response && (
+        <div className="p-2 text-[#ececec]">
+          {<Markdown className={"prose-li:list-disc"}>{response}</Markdown>}
+        </div>
       )}
       <div className="pb-[50px]" ref={endRef} />
       <form
@@ -62,12 +78,11 @@ export default function ChatPrompt() {
           type="text"
           placeholder="Ask Anything...."
           className="flex-1 border-none bg-transparent p-5 text-[#ececec] outline-none"
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
+          name="prompt"
         />
         <Button
           type="submit"
-          className="flex cursor-pointer items-center justify-center rounded-full border-none bg-[#605e68] p-2.5"
+          className="flex cursor-pointer items-center justify-center rounded-full border-none bg-[#adadad] p-2.5"
         >
           <Image src={arrow} alt="arrow" width={16} height={16} />
         </Button>

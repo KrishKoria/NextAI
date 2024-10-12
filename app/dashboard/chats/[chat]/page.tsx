@@ -1,7 +1,7 @@
 import ChatPrompt from "@/components/chatPrompt";
 
 export default function ChatPage({ params }: { params: { chat: string } }) {
-  const chatId = params.chat;
+  // const chatId = params.chat;
   return (
     <div className="relative flex h-full flex-col items-center">
       <div className="flex w-full flex-1 justify-center overflow-scroll">
