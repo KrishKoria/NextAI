@@ -3,25 +3,25 @@ import React, { useEffect, useRef, useState } from "react";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
-import { CldUploadWidget } from "next-cloudinary";
+import { CldImage, CldUploadWidget } from "next-cloudinary";
 import Image from "next/image";
 import attachment from "@/assets/attachment.png";
 import arrow from "@/assets/arrow.png";
 
 export default function ChatPrompt() {
   const [message, setMessage] = useState("");
+  const [image, setImage] = useState<string | null>(null);
   const endRef = useRef<HTMLDivElement>(null);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleSuccess = (result: any) => {
-    console.log(result.info.secure_url);
+    setImage(result.info.secure_url);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Handle sending the message here
     console.log("Sending message:", message);
-    setMessage("");
   };
 
   useEffect(() => {
@@ -32,6 +32,9 @@ export default function ChatPrompt() {
 
   return (
     <>
+      {image && (
+        <CldImage width={250} height={250} alt="chat image" src={image} />
+      )}
       <div className="pb-[50px]" ref={endRef} />
       <form
         onSubmit={handleSubmit}
